@@ -22,7 +22,14 @@ class CargoCrev < Formula
 
   depends_on "rust" => :build
   depends_on "rustup" => :test
-  depends_on "openssl@3"
+  depends_on "openssl@4"
+
+  # https://github.com/crev-dev/cargo-crev/pull/880
+  patch do
+    url "https://github.com/crev-dev/cargo-crev/pull/880.patch"
+    sha256 "79fe967b5c321a725a328a33e563ad50cf183e34089294f535a1e0af0282b808"
+    type :unofficial
+  end
 
   on_linux do
     depends_on "zlib-ng-compat"
@@ -35,7 +42,7 @@ class CargoCrev < Formula
   end
 
   def install
-    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@4")
     system "cargo", "install", "--no-default-features", *std_cargo_args(path: "cargo-crev")
   end
 
@@ -51,8 +58,8 @@ class CargoCrev < Formula
     system "cargo", "crev", "config", "dir"
 
     [
-      formula_opt_lib("openssl@3")/shared_library("libssl"),
-      formula_opt_lib("openssl@3")/shared_library("libcrypto"),
+      formula_opt_lib("openssl@4")/shared_library("libssl"),
+      formula_opt_lib("openssl@4")/shared_library("libcrypto"),
     ].each do |library|
       assert Utils.binary_linked_to_library?(bin/"cargo-crev", library),
              "No linkage with #{library.basename}! Cargo is likely using a vendored version."
