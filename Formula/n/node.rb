@@ -2,7 +2,7 @@ class Node < Formula
   desc "Open-source, cross-platform JavaScript runtime environment"
   homepage "https://nodejs.org/"
   license "MIT"
-  revision 2
+  revision 3
   compatibility_version 1
   head "https://github.com/nodejs/node.git", branch: "main"
 
@@ -53,7 +53,7 @@ class Node < Formula
   depends_on "llhttp"
   depends_on "merve"
   depends_on "nbytes"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "simdjson"
   depends_on "simdutf"
   depends_on "sqlite" # Fails with macOS sqlite.
@@ -142,7 +142,7 @@ class Node < Formula
       "merve"         => ["merve",                     "merve"],
       "nbytes"        => ["nbytes",                    "nbytes"],
       "nghttp2"       => ["nghttp2",                   "libnghttp2"],
-      "openssl"       => ["openssl/openssl",           "openssl@3"],
+      "openssl"       => ["openssl/openssl",           "openssl@4"],
       "simdjson"      => ["simdjson",                  "simdjson"],
       "simdutf"       => ["v8/third_party/simdutf",    "simdutf"],
       "sqlite"        => ["sqlite",                    "sqlite"],
